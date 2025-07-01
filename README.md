@@ -1,9 +1,9 @@
-# MacOS Training Guide
+# macOS Training Guide
 
 Welcome to **Mouse vs. AI: Robust Visual Foraging Challenge @ NeurIPS 2025**
 
-This is a training guide for **MacOS** system. For other systems, please check:
-[Windows](www.example.com) and [Linux](www.example.com)
+This is a training guide for **macOS**. For other operating systems, please refer to the following guides:
+[Windows](https://github.com/robustforaging/mouse_vs_ai_windows) and [Linux](https://github.com/robustforaging/mouse_vs_ai_linux)
 
 # Install conda environment
 open command prompt:
@@ -33,7 +33,7 @@ python train.py --runs-per-network 1 --env RandomTrain --network neurips,simple,
 ```bash
 python evaluate.py --model "/Users/<your_username>/path/to/your_model.onnx" --log-name "example.txt" --episodes 10
 ```
-⚠️ Important:
+❗ Important:
 Replace ```/Users/<your_username>/path/to/your_model.onnx``` with the full path to your own ONNX model file on your machine.
 
 
