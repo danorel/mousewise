@@ -3,7 +3,7 @@
 Welcome to **Mouse vs. AI: Robust Visual Foraging Challenge @ NeurIPS 2025**
 
 This is a training guide for **macOS**. For other operating systems, please check:
-[Windows](https://github.com/robustforaging/mouse_vs_ai_windows) and [Linux](https://github.com/robustforaging/mouse_vs_ai_linux)
+[Windows](https://github.com/robustforaging/mouse_vs_ai_windows?tab=readme-ov-file#windows-training-guide) and [Linux](https://github.com/robustforaging/mouse_vs_ai_linux)
 
 # Install conda environment
 open command prompt and `cd` into your working directory:
@@ -21,7 +21,8 @@ pip install pandas
 Open ```train.py``` and go to line 137 (where ```replace.replace_nature_visual_encoder``` is called).
 Update the path to point to the location of ```encoders.py``` in your conda environment.
 
-💡 Tip: The encoders.py file is usually located in your conda environment’s working directory.
+💡 Tip: The ```encoders.py``` file is usually located in your conda environment’s working directory. For example: ```/miniconda3/envs/mouse/lib/python3.8/site-packages/mlagents/trainers/torch```
+
 
 
 # Run script
