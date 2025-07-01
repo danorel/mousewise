@@ -5,11 +5,10 @@ Welcome to **Mouse vs. AI: Robust Visual Foraging Challenge @ NeurIPS 2025**
 This is a training guide for **macOS**. For other operating systems, please check:
 [Windows](https://github.com/robustforaging/mouse_vs_ai_windows?tab=readme-ov-file#windows-training-guide) and [Linux](https://github.com/robustforaging/mouse_vs_ai_linux)
 
-# Install conda environment
+# Create conda environment
 open command prompt and `cd` into your working directory:
 ```bash
 CONDA_SUBDIR=osx-64 conda create -n mouselegacy --file mouse.yml
-
 conda activate mouse
 ```
 You might also need to install pandas manually:
