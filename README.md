@@ -6,9 +6,17 @@ This is a training guide for **macOS**. For other operating systems, please chec
 [Windows](https://github.com/robustforaging/mouse_vs_ai_windows?tab=readme-ov-file#windows-training-guide) and [Linux](https://github.com/robustforaging/mouse_vs_ai_linux)
 
 # Create conda environment
-open command prompt and `cd` into your working directory:
+Open Terminal and navigate to the directory where you want to download the project.
+
+Clone the repository from GitHub:
 ```bash
-CONDA_SUBDIR=osx-64 conda create -n mouselegacy --file mouse.yml
+git clone https://github.com/robustforaging/mouse_vs_ai_macOS.git
+cd mouse_vs_ai_macOS
+```
+
+Then, create and activate the conda environment:
+```bash
+CONDA_SUBDIR=osx-64 conda env create -n mouse --file mouse.yml
 conda activate mouse
 ```
 You might also need to install pandas manually:
