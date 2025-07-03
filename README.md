@@ -20,7 +20,7 @@ CONDA_SUBDIR=osx-64 conda env create -n mouse --file mouse.yml
 conda activate mouse
 ```
 
-# Give permission to app
+#  Give Permission to a macOS App
 ```bash
 # Make the app's binary executable
 chmod +x ./Builds/RandomTrain/RandomTrain.app/Contents/MacOS/*
