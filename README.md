@@ -19,10 +19,6 @@ Then, create and activate the conda environment:
 CONDA_SUBDIR=osx-64 conda env create -n mouse --file mouse.yml
 conda activate mouse
 ```
-You might also need to install pandas manually:
-```bash
-pip install pandas
-```
 
 # Modify file path
 Open ```train.py``` and go to line 137 (where ```replace.replace_nature_visual_encoder``` is called).
