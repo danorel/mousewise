@@ -20,6 +20,19 @@ CONDA_SUBDIR=osx-64 conda env create -n mouse --file mouse.yml
 conda activate mouse
 ```
 
+# Give permission to app
+```bash
+# Make the app's binary executable
+chmod +x ./Builds/RandomTrain/RandomTrain.app/Contents/MacOS/*
+
+# Remove the 'quarantine' flag applied by macOS (for downloaded apps)
+xattr -dr com.apple.quarantine ./Builds/RandomTrain/RandomTrain.app
+```
+❗ Important:
+Replace ./Builds/RandomTrain/RandomTrain.app with the actual path to your .app bundle in both commands.
+You need to run these commands for each app you intend to execute if macOS flags it.
+
+
 # Modify file path
 Open ```train.py``` and go to line 137 (where ```replace.replace_nature_visual_encoder``` is called).
 Update the path to point to the location of ```encoders.py``` in your conda environment.
