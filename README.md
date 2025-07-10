@@ -1,8 +1,8 @@
-# macOS Training Guide
+# MacOS Training Guide
 
 Welcome to **Mouse vs. AI: Robust Visual Foraging Challenge @ NeurIPS 2025**
 
-This is a training guide for **macOS**. For other operating systems, please check:
+This is a training guide for **MacOS**. For other operating systems, please check:
 [Windows](https://github.com/robustforaging/mouse_vs_ai_windows?tab=readme-ov-file#windows-training-guide) and [Linux](https://github.com/robustforaging/mouse_vs_ai_linux/tree/main?tab=readme-ov-file#linux-training-guide)
 
 # Create conda environment
