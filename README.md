@@ -53,11 +53,22 @@ Training options:
                          (default choices: ['fully_connected', 'nature_cnn', 'simple', 'resnet'])
 ```
 
-Example command:
+Example command for training:
 ```bash
 python train.py --runs-per-network 1 --env RandomTrain --network neurips,simple,fully_connected,resnet,alexnet
 ```
 ## Evaluating
+```text
+Usage: python evaluate.py [options]
+
+Evaluation options:
+  --model      Path to the trained ONNX model file
+  --episodes   Number of episodes to run in inference(default: 50)
+  --env        Build folder name under ./Builds/
+  --log-name   Base name for the output log file
+```
+
+Example command for evaluation:
 ```bash
 python evaluate.py --model "/Users/<your_username>/path/to/your_model.onnx" --log-name "example.txt" --episodes 10
 ```
