@@ -74,10 +74,10 @@ Evaluation options:
 
 Example command for evaluation:
 ```bash
-python evaluate.py --model "/Users/<your_username>/path/to/your_model.onnx" --log-name "example.txt" --episodes 10
+python evaluate.py --model "/path/to/your_model.onnx" --log-name "example.txt" --episodes 10
 ```
 ❗ Important:
-Replace ```/Users/<your_username>/path/to/your_model.onnx``` with the full path to your own ONNX model file on your machine.
+Replace ```/path/to/your_model.onnx``` with the full path to your own ONNX model file on your machine.
 
 # Customize the model
 - To add architecture: 
@@ -85,6 +85,6 @@ Replace ```/Users/<your_username>/path/to/your_model.onnx``` with the full path 
   - To train your custom network, run ```python train.py --network MyNetwork1 [options]```
 - To adjust hyperparamters: 
   - Edit parameters in `/mouse_vs_ai_macOS/Encoders/nature.yaml` file
-  - 📝 Note: Please do not change the name of the file. Only modify the configuration values as needed.
+  - 📝 Note: Please do not change the name of this file or the parameter `vis_encode_type` in this file. Only modify other configuration values as needed.
 
 After making your changes, run the Python training script as described above.
