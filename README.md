@@ -29,7 +29,7 @@ chmod +x ./Builds/RandomTrain/RandomTrain.app/Contents/MacOS/*
 xattr -dr com.apple.quarantine ./Builds/RandomTrain/RandomTrain.app
 ```
 ❗ Important:
-Replace ./Builds/RandomTrain/RandomTrain.app with the actual path to your .app bundle in both commands.
+Replace ```./Builds/RandomTrain/RandomTrain.app``` with the actual path to your .app bundle in both commands.
 You need to run these commands for each app you intend to execute if macOS flags it.
 
 
