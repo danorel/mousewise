@@ -5,6 +5,8 @@ import subprocess
 from pathlib import Path
 from train import summarize_log
 import os
+import sys
+
 
 def parse_args():
     p = argparse.ArgumentParser(description="Evaluate an ONNX model on MouseVsAI")
@@ -19,10 +21,22 @@ def parse_args():
     return p.parse_args()
 
 def main():
+    
     args = parse_args()
+    args.model = os.path.abspath(args.model)
+    model_path = Path(args.model)
+
+    if not model_path.is_file():
+        print(f"[ERROR] Model file not found: {model_path}  \n"
+              "        Please pass a valid path with --model.")
+        sys.exit(1)   
+
     env_path = Path(f"./Builds/{args.env}")
-    #exe = env_path / "2D go to target v1.exe"
     exe = os.path.join(env_path,f"{args.env}.app/Contents/MacOS/2D go to target v1")
+
+    if not Path(exe).is_file():
+        print(f"[ERROR] Unity executable not found: {exe}")
+        sys.exit(1)
     
     # Prepare the Unity log filename
     log_fn = f"{args.log_name}_test.txt"
