@@ -5,6 +5,14 @@ Welcome to **Mouse vs. AI: Robust Visual Foraging Challenge @ NeurIPS 2025**
 This is a training guide for **MacOS**. For other operating systems, please check:
 [Windows](https://github.com/robustforaging/mouse_vs_ai_windows?tab=readme-ov-file#windows-training-guide) and [Linux](https://github.com/robustforaging/mouse_vs_ai_linux/tree/main?tab=readme-ov-file#linux-training-guide)
 
+# Install conda
+Open the command prompt:
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O ~/miniconda.sh
+bash ~/miniconda.sh -b -p $HOME/miniconda
+```
+In order to initialize after the installation process is done, first run ```source <path to conda>/bin/activate``` and then run ```conda init --all```.
+
 # Create conda environment
 Open Terminal and navigate to the directory where you want to download the project.
 
