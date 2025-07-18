@@ -19,6 +19,7 @@ Then, create and activate the conda environment:
 CONDA_SUBDIR=osx-64 conda env create -n mouse --file mouse.yml
 conda activate mouse
 ```
+You may also need to install pandas separately: ```pip install pandas```
 
 #  Give permission to a MacOS app
 ```bash
