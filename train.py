@@ -85,64 +85,79 @@ def summarize_log(log_path: str):
         print(f"Max target distance reached: {max(distances):.3f}/5.00")
     print("==========================\n")
 
-def train_solo(run_id, env_path, config_path, total_runs=5, log_name=None, env = 'Normal'):
+def train_solo(sys, env, run_id, env_path, config_path, total_runs=5, log_name=None):
     next_run = get_next_run_number(run_id)
     run_id_list = []
     for i in range(total_runs):
         current = f"{run_id}_{next_run + i}"
         print(f"Starting training: {current}")
-        # write the currentLog.txt
+
         fn = f"{(log_name if log_name else run_id)}_{next_run + i}_train.txt"       
-        # sa = Path(env_path) / "2D go to target v1_Data" / "StreamingAssets" / "currentLog.txt"
-        # sa.write_text(fn)
         
-        sa = os.path.join(env_path,
-                    f"{env}.app",
-                    "Contents",
-                    "Resources",
-                    "Data",
+        if sys == "macos":
+            sa = os.path.join(env_path,
+                        f"{env}.app",
+                        "Contents",
+                        "Resources",
+                        "Data",
+                        "StreamingAssets",
+                        "currentLog.txt")
+        if sys == "linux":
+            sa = os.path.join(env_path,
+                    "LinuxHeadless_Data",
                     "StreamingAssets",
                     "currentLog.txt")
-    
+        
         with open(sa, "w") as f:
             f.write(fn)
 
         time.sleep(1)
-        cmd = [
-            "mlagents-learn",
-            config_path,
-            "--env", str(Path(env_path) / f"{env}.app"),
-            "--run-id", current,
-            "--force",
-            "--env-args", "--screen-width=155", "--screen-height=86",
-        ]
+        if sys == "linux":
+            cmd = [
+                "mlagents-learn",
+                config_path,
+                "--env", str(Path(env_path) / "LinuxHeadless.x86_64"),
+                "--run-id", current,
+                "--force",
+                "--env-args", "--screen-width=155", "--screen-height=86",
+            ]
+        if sys == "macos":
+            cmd = [
+                "mlagents-learn",
+                config_path,
+                "--env", str(Path(env_path) / f"{env}.app"),
+                "--run-id", current,
+                "--force",
+                "--env-args", "--screen-width=155", "--screen-height=86",
+            ]
         subprocess.run(cmd, check=True)
         print(f"Completed training: {current}")
         time.sleep(5)
         run_id_list.append(current)
     return run_id_list
 
-def train_multiple_networks(networks, env_path, runs_per_network=2, log_name=None, env='NormalTrain'):
+def train_multiple_networks(sys, env, networks, env_path, runs_per_network=2, log_name=None):
     run_id_list2 = []
     for network in networks:
         if network == "fully_connected":
-            config_path = "./Config/fc.yaml"
+            config_path = "./config/fc.yaml"
         elif network == "simple":
-            config_path = "./Config/simple.yaml"
+            config_path = "./config/simple.yaml"
         elif network == "resnet":
-            config_path = "./Config/resnet.yaml"
+            config_path = "./config/resnet.yaml"
         else:
-            config_path = "./Config/nature.yaml"
+            config_path = "./config/nature.yaml"
             if network != "nature_cnn":
-                replace.replace_nature_visual_encoder("/Users/bionicvision/miniconda3/envs/mouse/lib/python3.8/site-packages/mlagents/trainers/torch/encoders.py", "./Encoders/" + network + ".py")
+                replace.replace_nature_visual_encoder("~/miniconda3/envs/mouse/lib/python3.8/site-packages/mlagents/trainers/torch/encoders.py", "./encoders/" + network + ".py")
 
         run_ids = train_solo(
+            sys=sys,
+            env=env,
             run_id=f"{network}_{env}",
             env_path=env_path,
             config_path=config_path,
             total_runs=runs_per_network,
             log_name=log_name,
-            env = env
         )
         run_id_list2.extend(run_ids)
     return run_id_list2
@@ -152,8 +167,10 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Train multiple networks on MouseVsAI")
+    parser.add_argument("--sys", required=True,
+                        help="System type (macos or linux)")
     parser.add_argument("--env", type=str, default="NormalTrain",
-                        help="Folder name under Builds/ to use as env")
+                        help="Folder name under builds/ to use as env")
     parser.add_argument("--runs-per-network", type=int, default=2,
                         help="How many runs per network variant")
     parser.add_argument("--networks", type=str, default="nature_cnn,simple,resnet",
@@ -162,12 +179,18 @@ if __name__ == "__main__":
                         help="Optional prefix for all log files")
     args = parser.parse_args()
 
-    env_folder = f"./Builds/{args.env}"
+    env_folder = f"./builds/{args.sys}/{args.env}"
     nets = [n.strip() for n in args.networks.split(",")]
-    run_ids = train_multiple_networks(nets, env_folder, args.runs_per_network, args.log_name, args.env)
+    run_ids = train_multiple_networks(
+        args.sys,
+        args.env,
+        nets,
+        env_folder,
+        args.runs_per_network,
+        args.log_name
+    )
 
-    # Summarize each run
-    logs_dir = Path(f"./Builds/{args.env}/logfiles")
+    logs_dir = Path(f"./builds/{args.env}/logfiles")
     logs_dir.mkdir(exist_ok=True)
     for rid in run_ids:
         summary_file = logs_dir / f"{(args.log_name if args.log_name else rid)}_train.txt"
