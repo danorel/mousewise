@@ -1,4 +1,4 @@
-name: mouse2
+name: mouse-linux
 channels:
   - conda-forge
   - defaults

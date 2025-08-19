@@ -120,6 +120,7 @@ def train_solo(sys, env, run_id, env_path, config_path, total_runs=5, log_name=N
                 "--run-id", current,
                 "--force",
                 "--env-args", "--screen-width=155", "--screen-height=86",
+                "--no-graphics"
             ]
         if sys == "macos":
             cmd = [

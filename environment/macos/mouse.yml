@@ -1,4 +1,4 @@
-name: mouse
+name: mouse-macos
 channels:
   - conda-forge
   - defaults
