@@ -61,7 +61,7 @@ Update the path to point to the location of ```encoders.py``` in your conda envi
 #### Training
 
 ```text
-Usage:  [options]
+Usage: python train.py [options]
 
 Training options:
   --runs-per-network R    Number of runs per network (default: 5)

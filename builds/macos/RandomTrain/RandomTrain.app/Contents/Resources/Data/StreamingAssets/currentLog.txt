@@ -1,1 +1,1 @@
-nature_cnn_RandomTrain_2_train.txt
+nature_cnn_RandomTrain_1_train.txt

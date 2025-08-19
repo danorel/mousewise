@@ -1,3 +1,14 @@
+import torch
+import torch.nn as nn
+
+from mlagents.trainers.torch.encoders import (
+    Initialization,
+    conv_output_shape,
+    exporting_to_onnx,
+    linear_layer
+)
+
+
 class NatureVisualEncoder(nn.Module):
     def __init__(self, height: int, width: int, initial_channels: int, output_size: int):
         super().__init__()
