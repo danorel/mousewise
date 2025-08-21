@@ -94,6 +94,11 @@ def train_solo(sys, env, run_id, env_path, config_path, total_runs=5, log_name=N
 
         fn = f"{(log_name if log_name else run_id)}_{next_run + i}_train.txt"       
         
+        if sys == "linux":
+            sa = os.path.join(env_path,
+                    "LinuxHeadless_Data",
+                    "StreamingAssets",
+                    "currentLog.txt")
         if sys == "macos":
             sa = os.path.join(env_path,
                         f"{env}.app",
@@ -102,11 +107,6 @@ def train_solo(sys, env, run_id, env_path, config_path, total_runs=5, log_name=N
                         "Data",
                         "StreamingAssets",
                         "currentLog.txt")
-        if sys == "linux":
-            sa = os.path.join(env_path,
-                    "LinuxHeadless_Data",
-                    "StreamingAssets",
-                    "currentLog.txt")
         
         with open(sa, "w") as f:
             f.write(fn)
@@ -118,9 +118,11 @@ def train_solo(sys, env, run_id, env_path, config_path, total_runs=5, log_name=N
                 config_path,
                 "--env", str(Path(env_path) / "LinuxHeadless.x86_64"),
                 "--run-id", current,
+                "--num-envs", "1",
+                "--time-scale", "40",
                 "--force",
+                "--debug",
                 "--env-args", "--screen-width=155", "--screen-height=86",
-                "--no-graphics"
             ]
         if sys == "macos":
             cmd = [
@@ -179,7 +181,7 @@ if __name__ == "__main__":
     parser.add_argument("--log-name", type=str, default=None,
                         help="Optional prefix for all log files")
     args = parser.parse_args()
-
+    
     env_folder = f"./builds/{args.sys}/{args.env}"
     nets = [n.strip() for n in args.networks.split(",")]
     run_ids = train_multiple_networks(

@@ -82,6 +82,15 @@ python train.py --runs-per-network 1 --env RandomTrain --network MyNetwork1, MyN
 - 💡 Troubleshooting: If training only proceeds after pressing ```ENTER```, try running the command with unbuffered output mode:  ```python -u train.py [options]``` 
 - If the issue persists, stop the current training episode and train again
 
+**IMPORTANT**
+
+Create virtual window if you're running the script on server:
+
+```bash
+Xvfb :99 -screen 0 155x86x24 &
+export DISPLAY=:99
+```
+
 #### Evaluating
 
 ```text
